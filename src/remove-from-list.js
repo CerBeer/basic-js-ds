@@ -22,11 +22,52 @@ const { NotImplementedError } = require('../extensions/index.js');
  *   }
  * }
  */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function removeKFromList(l, k) {
+  let root = l;
+  let prev = null;
+  let curr = l;
+  while (curr) {
+    if (curr.value === k) {
+      if (!prev) {
+        root = curr.next;
+      } else {
+        prev.next = curr.next;
+      }
+    } else {
+      prev = curr;
+    }
+    curr = curr.next;
+  }
+  return root;
 }
 
 module.exports = {
   removeKFromList
 };
+
+// function convertArrayToList(arr) {
+//   return arr.reverse().reduce((acc, cur) => {
+//     if (acc) {
+//       const node = new ListNode(cur);
+//       node.next = acc;
+//       return node;
+//     }
+
+//     return new ListNode(cur);
+//   }, null);
+// }
+
+// function assertEqual(answer, trueAnswer) {
+//   const answerStr = JSON.stringify(answer);
+//   const trueAnswerStr = JSON.stringify(trueAnswer);
+//   const reason = `${answerStr === trueAnswerStr}  `.slice(0, 6);
+//   console.log(`is ${reason} : ${answerStr} = ${trueAnswerStr}`);
+// }
+
+// const initial = convertArrayToList([3, 1, 2, 3, 4, 5]);
+// const expected = convertArrayToList([1, 2, 4, 5]);
+// assertEqual(removeKFromList(initial, 3), expected);
+
+// const initial = convertArrayToList([1, 2, 3, 3, 4, 5]);
+// const expected = convertArrayToList([1, 2, 4, 5]);
+// assertEqual(removeKFromList(initial, 3), expected);
